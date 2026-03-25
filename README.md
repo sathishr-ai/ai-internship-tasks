@@ -56,4 +56,30 @@ pip install -r requirements.txt
 - **task2_speech/**: Contains the Speech-to-Text recognition module.
 - **task3_style_transfer/**: Contains the CV-based Neural Style Transfer logic.
 - **task4_text_gen/**: Contains the GPT-2 based text generator and notebook.
-- **sample_assets/**: Includes `sample_audio.wav`, `content.jpg`, and `style.jpg` for immediate testing.
+- **results/**: Contains the output images for style transfer.
+
+---
+
+## 🎯 Project Outputs (Sample Results)
+
+### Task 1: Text Summarizer Output
+**Original Text**: *Artificial intelligence is intelligence demonstrated by machines...*  
+**Summary**:
+> AI is intelligence demonstrated by machines, in contrast to natural intelligence displayed by humans and animals. The term "artificial intelligence" is often used to describe machines that mimic "cognitive" functions that humans associate with the human mind.
+
+### Task 2: Speech Recognition Output
+**Audio File**: `sample_audio.wav`  
+**Transcription**:
+> "hello this is a test of the speech recognition system"
+
+### Task 3: Neural Style Transfer Output
+The model successfully applies artistic styles to photographs using VGG19.
+
+| Content | Style | Result (Stylized) |
+| :---: | :---: | :---: |
+| ![Content](results/content.jpg) | ![Style](results/style.jpg) | ![Result](results/stylized_output.jpg) |
+
+### Task 4: Generative Text Model Output
+**Prompt**: *"AI is"*  
+**Generated Text**:
+> AI is a business focused on delivering high-performance solutions for enterprises, individuals, and small businesses, and its expertise in the areas of data security, privacy and security, cloud computing, and enterprise computing...
