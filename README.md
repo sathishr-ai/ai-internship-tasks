@@ -3,9 +3,11 @@
 
   <p>
     <img src="https://img.shields.io/badge/Status-Completed-success?style=for-the-badge&logo=github" alt="Status">
+    <img src="https://img.shields.io/badge/NLP-Transformers-blue?style=for-the-badge&logo=huggingface" alt="NLP">
+    <img src="https://img.shields.io/badge/CV-VGG19-red?style=for-the-badge&logo=tensorflow" alt="CV">
+    <img src="https://img.shields.io/badge/Speech-Recognition-yellow?style=for-the-badge&logo=google" alt="Speech">
+    <img src="https://img.shields.io/badge/GenAI-GPT--2-blueviolet?style=for-the-badge&logo=openai" alt="GenAI">
     <img src="https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python" alt="Python">
-    <img src="https://img.shields.io/badge/TensorFlow-Deep_Learning-red?style=for-the-badge&logo=tensorflow" alt="TensorFlow">
-    <img src="https://img.shields.io/badge/HuggingFace-Transformers-orange?style=for-the-badge&logo=huggingface" alt="HuggingFace">
   </p>
 </div>
 
