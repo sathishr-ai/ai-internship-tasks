@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=40&duration=4000&pause=1000&color=3B82F6&center=true&vCenter=true&width=800&lines=Artificial+Intelligence+Internship;Machine+Learning+Mastery;Natural+Language+Processing;Computer+Vision+%26+Style+Transfer;Generative+AI+%26+LLMs" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=40&duration=3000&pause=1000&color=3B82F6&center=true&vCenter=true&width=800&lines=AI+Internship+Portfolio;Artificial+Intelligence;CODTECH+IT+SOLUTIONS" alt="Typing SVG" />
 
   <p>
     <img src="https://img.shields.io/badge/Status-Completed-success?style=for-the-badge&logo=github" alt="Status">
