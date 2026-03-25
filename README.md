@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/render?type=soft&color=auto&height=200&section=header&text=AI%20Internship%20Tasks&fontSize=70" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=auto&height=200&section=header&text=AI%20Internship%20Tasks&fontSize=70" width="100%"/>
 
   <p>
     <img src="https://img.shields.io/badge/Status-Completed-success?style=for-the-badge&logo=github" alt="Status">
@@ -23,7 +23,7 @@
     </tr>
     <tr>
       <td><b>INTERN ID</b></td>
-      <td><YOUR_INTERN_ID></td>
+      <td><b>CTIS7238</b></td>
     </tr>
     <tr>
       <td><b>DOMAIN</b></td>
