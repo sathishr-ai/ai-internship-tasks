@@ -1,12 +1,49 @@
 # text_generator.py
 # Requirements: pip install transformers torch
 
+import os
+import sys
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
+os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+os.environ["HF_HUB_DISABLE_IMPLICIT_TOKEN"] = "1"
+os.environ["DISABLE_TQDM"] = "1"
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+import warnings
+warnings.filterwarnings("ignore")
+
+import logging
+logging.getLogger("huggingface_hub").setLevel(logging.ERROR)
+
+import transformers
+transformers.logging.set_verbosity_error()
+
+try:
+    import huggingface_hub
+    huggingface_hub.utils.disable_progress_bars()
+except ImportError:
+    pass
+
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
 def load_model_and_tokenizer(model_name="gpt2"):
     """Load the pre-trained GPT-2 model and tokenizer."""
-    tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-    model = GPT2LMHeadModel.from_pretrained(model_name)
+    import warnings
+    warnings.simplefilter(action='ignore', category=FutureWarning)
+    warnings.simplefilter(action='ignore', category=UserWarning)
+    warnings.filterwarnings("ignore")
+    
+    import sys
+    null_file = open(os.devnull, 'w')
+    old_stderr = sys.stderr
+    sys.stderr = null_file
+    try:
+        tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+        model = GPT2LMHeadModel.from_pretrained(model_name)
+    finally:
+        sys.stderr = old_stderr
+        null_file.close()
     # Add padding token if not present
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -46,17 +83,28 @@ def generate_text(prompt, tokenizer, model, max_length=200, temperature=0.7, top
     return generated_text
 
 if __name__ == "__main__":
-    # Load model (first download may take a while)
-    print("Loading GPT-2 model...")
+    import sys
+    import os
+    # Add parent directory to path for utils
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from utils.terminal_style import style
+
+    # Task title
+    style.print_header("AI Text Generation")
+
     tokenizer, model = load_model_and_tokenizer()
 
     # Example: generate text on a specific topic
-    import sys
     if len(sys.argv) > 1:
         user_prompt = sys.argv[1]
     else:
-        user_prompt = input("Enter your prompt: ") or "The future of AI in 2026 is"
+        user_prompt = "AI is"
         
-    generated = generate_text(user_prompt, tokenizer, model, max_length=150)
-    print("\nGenerated text:")
-    print(generated)
+    # Allow passing max_length as second argument, default to 50
+    max_length = int(sys.argv[2]) if len(sys.argv) > 2 else 50
+        
+    style.print_input_panel(user_prompt, "PROMPT")
+    
+    generated = generate_text(user_prompt, tokenizer, model, max_length=max_length)
+
+    style.print_output_panel(generated, "GENERATED TEXT")

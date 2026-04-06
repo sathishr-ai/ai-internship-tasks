@@ -79,34 +79,62 @@ def neural_style_transfer(content_path, style_path, output_path,
     opt = tf.optimizers.Adam(learning_rate=2.0)
 
     # Training loop
-    for i in range(iterations):
-        with tf.GradientTape() as tape:
-            # Forward pass
-            outputs = model(generated_image)
-            c_loss = content_loss(content_target, outputs[0])
-            s_loss = 0
-            for j, target in enumerate(style_targets):
-                s_loss += style_loss(target, outputs[j+1])
-            total_loss = content_weight * c_loss + style_weight * s_loss
+    with style.get_progress("Performing Neural Style Transfer...") as progress:
+        task = progress.add_task("Optimizing", total=iterations)
+        
+        for i in range(iterations):
+            with tf.GradientTape() as tape:
+                # Forward pass
+                outputs = model(generated_image)
+                c_loss = content_loss(content_target, outputs[0])
+                s_loss = 0
+                for j, target in enumerate(style_targets):
+                    s_loss += style_loss(target, outputs[j+1])
+                total_loss = content_weight * c_loss + style_weight * s_loss
 
-        grads = tape.gradient(total_loss, generated_image)
-        opt.apply_gradients([(grads, generated_image)])
+            grads = tape.gradient(total_loss, generated_image)
+            opt.apply_gradients([(grads, generated_image)])
 
-        # Clip pixel values to maintain valid range
-        generated_image.assign(tf.clip_by_value(generated_image, -128.0, 128.0))
-
-        if i % 100 == 0:
-            print(f"Iteration {i}: total loss = {total_loss.numpy():.2f}")
+            # Clip pixel values to maintain valid range
+            generated_image.assign(tf.clip_by_value(generated_image, -128.0, 128.0))
+            
+            progress.update(task, advance=1)
 
     # Save final image
     save_image(generated_image.numpy(), output_path)
-    print(f"Styled image saved to {output_path}")
 
 if __name__ == "__main__":
+    import sys
+    import os
+    # Add parent directory to path for utils
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from utils.terminal_style import style
+
+    # Task title
+    style.print_header("Neural Style Transfer")
+
     # Example usage – replace with your own image paths
-    neural_style_transfer(
-        content_path="content.jpg",
-        style_path="style.jpg",
-        output_path="stylized_output.jpg",
-        iterations=500  # increase for better quality
-    )
+    content_path="content.jpg"
+    style_path="style.jpg"
+    output_path="stylized_output.jpg"
+    
+    style.print_info(f"Content: {content_path} | Style: {style_path}")
+    
+    # Check if files exist
+    if not os.path.exists(content_path) or not os.path.exists(style_path):
+        style.console.print("[bold red]Error:[/] Input images not found. Please provide 'content.jpg' and 'style.jpg'.")
+    else:
+        neural_style_transfer(
+            content_path=content_path,
+            style_path=style_path,
+            output_path=output_path,
+            iterations=500  # increase for better quality
+        )
+        
+        style.print_metrics("Job Summary", {
+            "Content Image": content_path,
+            "Style Image": style_path,
+            "Output Path": output_path,
+            "Total Iterations": 500
+        })
+        style.print_success("Neural Style Transfer Completed!")

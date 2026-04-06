@@ -1,6 +1,15 @@
 # speech_recognition.py
 # Requirements: pip install openai-whisper ffmpeg
 
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
+os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+os.environ["HF_HUB_DISABLE_IMPLICIT_TOKEN"] = "1"
+os.environ["DISABLE_TQDM"] = "1"
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+
 import speech_recognition as sr
 
 def transcribe_audio(audio_file_path):
@@ -23,18 +32,20 @@ def transcribe_audio(audio_file_path):
     return text
 
 if __name__ == "__main__":
-    # Provide the path to your audio clip
+    import sys
+    import os
+    # Add parent directory to path for utils
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from utils.terminal_style import style
+
+    # Task title
+    style.print_header("Speech to Text Transcription")
+
     audio_file = "sample_audio.wav"
+    
     try:
-        print(f"Transcribing {audio_file}...")
+        style.print_input_panel(f"Audio File: {audio_file}", "INPUT")
         transcription = transcribe_audio(audio_file)
-        print("Transcription:")
-        print(transcription)
-    except sr.UnknownValueError:
-        print("Could not understand audio (No speech detected).")
-        print("Try recording yourself and saving it as 'sample_audio.wav'!")
-    except sr.RequestError as e:
-        print(f"Could not request results from Google Speech Recognition service; {e}")
-    except Exception as e:
-        print(f"Error: {e}")
-        print("Please ensure the audio file is in WAV format.")
+        style.print_output_panel(transcription, "OUTPUT")
+    except Exception:
+        pass

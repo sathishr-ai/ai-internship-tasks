@@ -62,25 +62,27 @@
 
 ### 📝 Task 1: NLP Text Summarization
 > **Model**: T5-Small (`transformers`)  
-> **Input**: *Lengthy technical article regarding Artificial Intelligence...*  
-> **Output**: AI is intelligence demonstrated by machines, in contrast to natural intelligence displayed by humans and animals...
+<p align="center">
+  <img src="screenshots/task1_summarization.png" width="800" alt="Task 1 Summarization">
+</p>
 
 ### 🎙️ Task 2: Speech-to-Text Recognition
 > **Engine**: `SpeechRecognition` (Google Web API)  
-> **Input**: *Encoded WAV Audio Stream*  
-> **Output**: *"hello this is a test of the speech recognition system"*
+<p align="center">
+  <img src="screenshots/task2_speech_to_text.png" width="800" alt="Task 2 Speech recognition">
+</p>
 
 ### 🎨 Task 3: Neural Style Transfer (VGG19)
-**Description**: Synthesis of content representations and style textures using deep convolutional feature maps.
-
-| Content Image | Style Image | Stylized Output |
-| :---: | :---: | :---: |
-| ![Content](results/content.jpg) | ![Style](results/style.jpg) | ![Result](results/stylized_output.jpg) |
+> **Architecture**: Convolutional Neural Networks (VGG19)  
+<p align="center">
+  <img src="screenshots/task3_style_transfer.png" width="850" alt="Task 3 Neural Style Transfer">
+</p>
 
 ### 🤖 Task 4: Generative AI Text Model (GPT-2)
 > **Architecture**: GPT-2 (`transformers`)  
-> **Prompt**: *"AI is"*  
-> **Output**: AI is a business focused on delivering high-performance solutions for enterprises...
+<p align="center">
+  <img src="screenshots/task4_text_generation.png" width="800" alt="Task 4 Text Generation">
+</p>
 
 ---
 
