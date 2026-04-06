@@ -1,0 +1,6 @@
+carousel_generator/
+LinkedIn_Carousel_Final.pdf
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
